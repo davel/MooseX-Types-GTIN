@@ -5,8 +5,21 @@ use ExtUtils::MakeMaker;
 WriteMakefile(
     NAME              => 'MooseX::Types::GTIN',
     VERSION_FROM      => 'lib/MooseX/Types/GTIN.pm', # finds $VERSION
-    PREREQ_PM         => {}, # e.g., Module::Name => 1.1
+    PREREQ_PM         => {
+        Moose => 0,
+        'MooseX::Types::Moose' => 1,
+    },
+    BUILD_REQUIRES => {
+        'Test::More' => 0,
+        'Test::Exception' => 0,
+    },
     ($] >= 5.005 ?     ## Add these new keywords supported since 5.005
       (ABSTRACT_FROM  => 'lib/MooseX/Types/GTIN.pm', # retrieve abstract from module
        AUTHOR         => 'Dave Lambley <davel@state51.co.uk>') : ()),
+    META_MERGE => {
+        resources => {
+            repository => 'https://github.com/davel/MooseX-Types-GTIN',
+        },
+    },
+
 );
