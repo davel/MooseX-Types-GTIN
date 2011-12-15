@@ -7,6 +7,7 @@ use Test::More;
 use Test::Exception;
 
 use MooseX::Types::GTIN::Validate;
+use MooseX::Types::GTIN qw/ Barcode ISBN10 /;
 
 my @good_gtin = (qw/
     12312313
@@ -49,5 +50,12 @@ foreach my $gtin (@empty) {
     throws_ok { MooseX::Types::GTIN::Validate::assert_gtin($gtin); } qr/^InvalidEmptyBarcode/, "gtin $gtin failed";
 }
 
+foreach my $gtin (@good_gtin) {
+    ok is_Barcode($gtin), "$gtin validates";
+}
+
+foreach my $gtin (@bad_checksum, @bad_length, @empty) {
+    ok !is_Barcode($gtin), "$gtin does not validate";
+}
 
 done_testing;
