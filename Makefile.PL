@@ -7,7 +7,7 @@ WriteMakefile(
     VERSION_FROM      => 'lib/MooseX/Types/GTIN.pm', # finds $VERSION
     PREREQ_PM         => {
         Moose => 0,
-        'MooseX::Types::Moose' => 1,
+        'MooseX::Types::Moose' => 0,
     },
     BUILD_REQUIRES => {
         'File::Find' => 0,
