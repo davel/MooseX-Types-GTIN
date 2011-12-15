@@ -1,0 +1,6 @@
+Changes
+Makefile.PL
+MANIFEST
+README
+t/MooseX-Types-GTIN.t
+lib/MooseX/Types/GTIN.pm
