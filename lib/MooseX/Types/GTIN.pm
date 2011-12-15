@@ -67,8 +67,8 @@ subtype GTIN, as Int,
     message { local $@; eval { MooseX::Types::GTIN::Validate::assert_gtin($_); }; my $error = $@; $error =~ / at.+/; $error };
 
 subtype ISBN10, as Int,
-    where { length($_)==10 },
-    message { "Wrong length to be a ISBN10" };
+    where { /^\d{9}(?:\d|X|x)$/ },
+    message { "Wrong form to be a ISBN10" };
 
 coerce GTIN,
         from ISBN10,
