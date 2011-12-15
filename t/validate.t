@@ -59,6 +59,7 @@ foreach my $gtin (@bad_checksum, @bad_length, @empty) {
 }
 
 is(to_Barcode("043243242424"), "043243242424");
+is(to_Barcode(" 043243242424 "), "043243242424");
 is(to_Barcode(43243242424), "043243242424");
 
 ok is_ISBN10("0974514055");
@@ -69,5 +70,15 @@ ok is_ISBN10("0974514055");
 }
 
 ok !is_ISBN10("097451405");
+is(to_ISBN10("0974514055"), "0974514055");
+is(to_ISBN10(" 0974514055 "), "0974514055");
+
+
+is(to_Barcode("0974514055"), "9780974514055");
+
+{
+    local $TODO = "Won't coerce all the way from a dirty string to ISBN10 to a Barcode";
+is(to_Barcode(" 0974514055 "), "9780974514055");
+}
 
 done_testing;
