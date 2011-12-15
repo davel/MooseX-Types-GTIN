@@ -1,6 +1,54 @@
 package MooseX::Types::GTIN;
 our $VERSION = '0.01';
 
+=head1 NAME
+
+MooseX::Types::GTIN
+
+=head1 SYNOPSIS
+
+    use MooseX::Types::GTIN qw/ GTIN ISBN10 /;
+
+    is_GTIN(829410333658); # returns true
+    to_GTIN("  829410333658 "); # returns 829410333658
+
+    is_ISBN10(0974514055); # returns true
+    to_GTIN(0974514055); # returns 9780974514055
+
+    use Moose;
+    has barcode => ( is => "rw", isa => GTIN );
+    has isbn =>    ( is => "rw", isa => ISBN10 );
+
+=head1 DESCRIPTION
+
+This package provides L<Moose> types for "Global Trade Identifiers, also
+known as UPCs and EANs.  8, 12, 13 and 14 digital varients of GTINs are
+supported, along with 10 digit ISBN numbers.  The checksum of GTINs are
+validated, ISBN numbers are only checked for the correct form.
+
+=head1 SEE ALSO
+
+=over
+
+=item *
+
+L<MooseX::Types>
+
+=back
+
+=head1 AUTHOR
+
+=over
+
+=item *
+
+Dave Lambley <davel@state51.co.uk>, on behalf of his employer,
+L<http://www.state51.co.uk>.
+
+=back
+
+=cut
+
 use 5.10.0;
 use MooseX::Types::Moose qw/Int Str/;
 use MooseX::Types::Structured qw(Dict);
