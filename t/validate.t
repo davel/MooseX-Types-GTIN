@@ -58,4 +58,7 @@ foreach my $gtin (@bad_checksum, @bad_length, @empty) {
     ok !is_Barcode($gtin), "$gtin does not validate";
 }
 
+is(to_Barcode("043243242424"), "043243242424");
+is(to_Barcode(43243242424), "043243242424");
+
 done_testing;
