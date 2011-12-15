@@ -2,7 +2,6 @@ use strict;
 use warnings;
 
 use Test::More;
-use Path::Class;
 use File::Find;
 use Class::MOP;
 
