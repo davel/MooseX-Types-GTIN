@@ -61,4 +61,13 @@ foreach my $gtin (@bad_checksum, @bad_length, @empty) {
 is(to_Barcode("043243242424"), "043243242424");
 is(to_Barcode(43243242424), "043243242424");
 
+ok is_ISBN10("0974514055");
+
+{
+    local $TODO = "No ISBN checksum validation yet";
+    ok !is_ISBN10("0974514054");
+}
+
+ok !is_ISBN10("097451405");
+
 done_testing;

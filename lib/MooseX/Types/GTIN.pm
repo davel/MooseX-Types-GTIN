@@ -22,7 +22,8 @@ subtype Barcode, as Int,
 coerce Barcode, from Int, via { "0$_" };
 
 subtype ISBN10, as Int,
-    where { length($_) == 10 };
+    where { length($_)==10 };
+
 
 foreach my $type (Barcode, ISBN10) {
     coerce $type, from Str, via { # Just trim all whitespace
