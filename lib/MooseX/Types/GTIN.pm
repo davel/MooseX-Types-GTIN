@@ -1,7 +1,7 @@
 package MooseX::Types::GTIN;
 our $VERSION = '0.01';
 
-use 5.10;
+use 5.10.0;
 use MooseX::Types::Moose qw/Int Str/;
 use MooseX::Types::Structured qw(Dict);
 use MooseX::Types
@@ -12,7 +12,7 @@ use MooseX::Types
 
 # import builtin types
 use Moose::Util::TypeConstraints;
-use Mooses::Types::GTIN::Validate;
+use MooseX::Types::GTIN::Validate;
 use Try::Tiny;
 
 subtype Barcode, as Int,
