@@ -16,8 +16,8 @@ use MooseX::Types::GTIN::Validate;
 use Try::Tiny;
 
 subtype Barcode, as Int,
-    where { try { MooseX::Types::GTIN::Validate::assert_barcode($_); 1; } },
-    message { local $@; eval { MooseX::Types::GTIN::Validate::assert_barcode($_); }; my $error = $@; $error =~ / at.+/; $error };
+    where { try { MooseX::Types::GTIN::Validate::assert_gtin($_); 1; } },
+    message { local $@; eval { MooseX::Types::GTIN::Validate::assert_gtin($_); }; my $error = $@; $error =~ / at.+/; $error };
 
 coerce Barcode, from Int, via { "0$_" };
 
@@ -32,7 +32,7 @@ foreach my $type (Barcode, ISBN10) {
 
 coerce Barcode, from ISBN10, via {
     $_ = '978'.substr($_, 0, -1); # Prepend 978, Throw away last digit
-    $_ .= state51::Validate::calc_mod10_check_digit($_); # Add checksum
+    $_ .= MooseX::TYpes::GTIN::Validate::calc_mod10_check_digit($_); # Add checksum
     return $_;
 };
 
