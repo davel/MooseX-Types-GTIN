@@ -7,16 +7,11 @@ use Class::MOP;
 
 use FindBin;
 use File::Spec;
-use lib File::Spec->catdir($FindBin::Bin, "lib");
 
 # http://www.simplicidade.org/notes/archives/2009/11/perl_testing_an.html
 # Test::Compile might also be useful
 
-my $lib = dir('lib')->absolute;
-
-if ($lib->can('resolve')) {
-    $lib = $lib->resolve;
-}
+my $lib = File::Spec->catdir($FindBin::Bin, "..", "lib");
 
 my $failed = 0;
 find({
