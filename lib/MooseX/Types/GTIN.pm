@@ -19,17 +19,28 @@ subtype Barcode, as Int,
     where { try { MooseX::Types::GTIN::Validate::assert_gtin($_); 1; } },
     message { local $@; eval { MooseX::Types::GTIN::Validate::assert_gtin($_); }; my $error = $@; $error =~ / at.+/; $error };
 
-coerce Barcode, from Int, via { "0$_" };
+coerce Barcode, from subtype(Str => where { /\s*(?:\d{8}|\d{12,14})\s*$/ }),
+               via  { # Just trim all whitespace
+                    s!\s+!!g;
+
+                    # Magic workaround for spreadsheets eating the first digit
+                    # of a UPC.
+                    if (length($_)==11) {
+                        return "0$_";
+                    }
+                    else {
+                        return $_;
+                    }
+               };
 
 subtype ISBN10, as Int,
-    where { length($_)==10 };
+    where { length($_)==10 },
+    message { "Wrong length to be a ISBN10" };
 
-
-foreach my $type (Barcode, ISBN10) {
-    coerce $type, from Str, via { # Just trim all whitespace
-        s!\s+!!g; $_;
-    };
-}
+coerce ISBN10, from subtype(Str => where { warn $_; /\s*\d{9}(?:\d|X|x)\s*$/ }),
+               via  { # Just trim all whitespace
+                    s!\s+!!g; $_;
+               };
 
 coerce Barcode, from ISBN10, via {
     $_ = '978'.substr($_, 0, -1); # Prepend 978, Throw away last digit
