@@ -7,7 +7,7 @@ use Test::More;
 use Test::Exception;
 
 use MooseX::Types::GTIN::Validate;
-use MooseX::Types::GTIN qw/ Barcode ISBN10 /;
+use MooseX::Types::GTIN qw/ GTIN ISBN10 /;
 
 my @good_gtin = (qw/
     12312313
@@ -51,16 +51,16 @@ foreach my $gtin (@empty) {
 }
 
 foreach my $gtin (@good_gtin) {
-    ok is_Barcode($gtin), "$gtin validates";
+    ok is_GTIN($gtin), "$gtin validates";
 }
 
 foreach my $gtin (@bad_checksum, @bad_length, @empty) {
-    ok !is_Barcode($gtin), "$gtin does not validate";
+    ok !is_GTIN($gtin), "$gtin does not validate";
 }
 
-is(to_Barcode("043243242424"), "043243242424");
-is(to_Barcode(" 043243242424 "), "043243242424");
-is(to_Barcode(43243242424), "043243242424");
+is(to_GTIN("043243242424"), "043243242424");
+is(to_GTIN(" 043243242424 "), "043243242424");
+is(to_GTIN(43243242424), "043243242424");
 
 ok is_ISBN10("0974514055");
 
@@ -74,11 +74,11 @@ is(to_ISBN10("0974514055"), "0974514055");
 is(to_ISBN10(" 0974514055 "), "0974514055");
 
 
-is(to_Barcode("0974514055"), "9780974514055");
+is(to_GTIN("0974514055"), "9780974514055");
 
 {
-    local $TODO = "Won't coerce all the way from a dirty string to ISBN10 to a Barcode";
-is(to_Barcode(" 0974514055 "), "9780974514055");
+    local $TODO = "Won't coerce all the way from a dirty string to ISBN10 to a GTIN";
+is(to_GTIN(" 0974514055 "), "9780974514055");
 }
 
 done_testing;

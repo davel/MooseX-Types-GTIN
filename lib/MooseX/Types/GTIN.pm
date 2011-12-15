@@ -6,7 +6,7 @@ use MooseX::Types::Moose qw/Int Str/;
 use MooseX::Types::Structured qw(Dict);
 use MooseX::Types
     -declare => [qw(
-        Barcode
+        GTIN
         ISBN10
     )];
 
@@ -15,7 +15,7 @@ use Moose::Util::TypeConstraints;
 use MooseX::Types::GTIN::Validate;
 use Try::Tiny;
 
-subtype Barcode, as Int,
+subtype GTIN, as Int,
     where { try { MooseX::Types::GTIN::Validate::assert_gtin($_); 1; } },
     message { local $@; eval { MooseX::Types::GTIN::Validate::assert_gtin($_); }; my $error = $@; $error =~ / at.+/; $error };
 
@@ -23,7 +23,7 @@ subtype ISBN10, as Int,
     where { length($_)==10 },
     message { "Wrong length to be a ISBN10" };
 
-coerce Barcode,
+coerce GTIN,
         from ISBN10,
             via {
                 $_ = '978'.substr($_, 0, -1); # Prepend 978, Throw away last digit
