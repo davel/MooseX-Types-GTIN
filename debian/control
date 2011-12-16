@@ -8,7 +8,7 @@ Build-Depends-Indep: perl (>= 5.10.1),
     libfile-spec-perl
 Maintainer: Dave Lambley <davel@state51.co.uk>
 Standards-Version: 3.7.2
-Homepage: http://state51.co.uk/
+Homepage: http://search.cpan.org/~dlambley/MooseX-Types-GTIN/
 
 Package: libmoosex-types-gtin-perl
 Architecture: all

@@ -21,6 +21,7 @@ WriteMakefile(
     META_MERGE => {
         resources => {
             repository => 'https://github.com/davel/MooseX-Types-GTIN',
+            homepage   => 'http://search.cpan.org/~dlambley/MooseX-Types-GTIN/',
         },
     },
 
