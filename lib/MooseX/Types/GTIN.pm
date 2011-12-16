@@ -34,6 +34,10 @@ validated, ISBN numbers are only checked for the correct form.
 
 L<MooseX::Types>
 
+=item *
+
+L<http://www.gs1.org/barcodes/support/check_digit_calculator>
+
 =back
 
 =head1 AUTHOR
