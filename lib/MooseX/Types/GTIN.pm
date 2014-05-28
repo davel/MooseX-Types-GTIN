@@ -53,7 +53,6 @@ L<http://www.state51.co.uk>.
 
 =cut
 
-use 5.10.0;
 use MooseX::Types::Moose qw/Int Str/;
 use MooseX::Types
     -declare => [qw(
