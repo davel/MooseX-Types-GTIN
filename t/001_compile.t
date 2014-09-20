@@ -3,7 +3,7 @@ use warnings;
 
 use Test::More;
 use File::Find;
-use Class::MOP;
+use Class::Load qw/ try_load_class /;
 
 use FindBin;
 use File::Spec;
@@ -29,10 +29,8 @@ find({
 
     $m = join("::", @dirs, $file);
 
-    ok( eval { Class::MOP::load_class($m); 1 }, "$m compiled " . $@||'') or do { $failed = 1 };
+    ok(try_load_class($m), "$m compiled " );
   },
 }, $lib);
-
-BAIL_OUT("COMPILE FAILED") if $failed;
 
 done_testing();
