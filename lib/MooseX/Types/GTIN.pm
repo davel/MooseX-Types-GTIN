@@ -3,7 +3,7 @@ our $VERSION = '0.02';
 
 =head1 NAME
 
-MooseX::Types::GTIN
+MooseX::Types::GTIN - Moose types for Global Trade Identifiers.
 
 =head1 SYNOPSIS
 
