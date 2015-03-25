@@ -14,10 +14,8 @@ sub assert_gtin {
 
     # GTIN-8, GTIN-12 (UPC), GTIN-13 (EAN) and GTIN-14 are all allowed
     if (($length >= 12 && $length <= 14) || ($length == 8)) {
-        my $check_digit = substr($value, -1, 1);
-        my $calc_checksum = calc_mod10_check_digit(substr($value, 0, -1));
 
-        if ($calc_checksum ne $check_digit) {
+        if (incorrect_checksum($value)) {
             die('InvalidBarcodeIncorrectCheckSum');
         }
     }
@@ -27,6 +25,24 @@ sub assert_gtin {
 
     return($value);
 }
+
+
+sub incorrect_checksum{
+    
+    my ($value) = @_;   
+
+        my $check_digit = substr($value, -1, 1);
+        my $calc_checksum = calc_mod10_check_digit(substr($value, 0, -1));
+
+        if ($calc_checksum ne $check_digit) {
+            return 1;
+        }
+        else{
+            return 0;
+        }
+    
+}
+
 
 # value is the barcode without a checkdigit
 sub calc_mod10_check_digit {
